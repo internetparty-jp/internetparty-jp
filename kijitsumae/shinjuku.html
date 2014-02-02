@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<title>[ インターネッ党 ] : 2014年都知事選挙 期日前投票所MAP 新宿区</title>
+	<style type="text/css">
+	html { height: 100% }
+	body { height: 100%; margin: 0; padding: 0 }
+	#map_canvas { height: 100% }
+	</style>
+	<script type="text/javascript"
+	src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA_YYYirAi-2ZU8k7dJ-5K41At7_0TVPww&sensor=false">
+	</script>
+	<script type="text/javascript">
+
+var startLocation;
+var map;
+function initialize() {
+	var mapOptions = {
+		center: new google.maps.LatLng(35.703156,139.71079),
+		zoom: 13,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+	map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
+		for(var i = 0;i< points.length;i++){
+			point(points[i],map);
+		};
+}
+
+function point(arr,map){
+	var Latlng = new google.maps.LatLng(arr[2],arr[3]);
+	var marker = new google.maps.Marker(
+		{ position: Latlng,
+			map: map,
+			title: arr[0]});
+	var infowindow = new google.maps.InfoWindow({
+		content: arr[0]+"<br /> "+ arr[1]+ "<br />"
+		+"<a href='#' onclick=\'myroute(\""+arr[1]+"\")\'>現在地からのルートを表示</a>" ,
+		position: Latlng
+	});
+	google.maps.event.addListener(marker, 'click', function() {
+		infowindow.open(map);
+	});
+}
+
+function myroute(target){
+  var url = 'http://maps.google.co.jp/maps?f=d&source=s_d&saddr=FROMLAT,FROMLNG&daddr=TODEST';
+    url = url.replace(/FROMLAT/, startLocation.lat());
+    url = url.replace(/FROMLNG/, startLocation.lng());
+    url = url.replace(/TODEST/, target);
+    location.href = url;
+}
+
+/* https://developers.google.com/maps/documentation/javascript/directions?hl=ja
+　ルート表示　http://d.hatena.ne.jp/fatwebstudy/20120905/1346845897
+*/
+
+var points =[
+["区役所第一分庁舎 ","新宿区歌舞伎町1－5－1",35.6934124,139.7034161],
+["四谷特別出張所","新宿区内藤町87",35.6875884,139.7144957],
+["箪笥町特別出張所","新宿区箪笥町15",35.7005708,139.7341823],
+["榎町特別出張所","新宿区早稲田町85",35.7054367,139.7267186],
+["若松町特別出張所","新宿区若松町12－6",35.6990704,139.7164087],
+["大久保特別出張所","新宿区大久保2－12－7 ",35.7016004,139.7068125],
+["戸塚特別出張所","新宿区高田馬場2－18－1",35.7144045,139.7050955],
+["落合第一特別出張所","新宿区下落合4－6－7 ",35.7187175,139.6949936],
+["落合第二特別出張所","新宿区中落合4－17－13 ",35.7198337,139.6830641],
+["柏木特別出張所","新宿区北新宿2－3－7 ",35.6985308,139.6902479],
+["角筈特別出張所","新宿区西新宿4－33－7 ",35.6862101,139.6890845]
+]
+</script>
+</head>
+<body onload="initialize()">
+	<div id="map_canvas" style="width:100%; height:100%"></div>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-47675473-1', 'internetparty.jp');
+	  ga('send', 'pageview');
+
+	</script>
+</body>
+</html>
